@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C14D72A2227A1AB00CE566B /* sun-behind-cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun-behind-cloud.png"; sourceTree = "<group>"; };
 		280E930A221E57B80015F949 /* SARS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SARS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		280E930D221E57B80015F949 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		280E930F221E57B80015F949 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 				280E9316221E57BF0015F949 /* Assets.xcassets */,
 				280E9318221E57BF0015F949 /* LaunchScreen.storyboard */,
 				280E931B221E57BF0015F949 /* Info.plist */,
+				0C14D72A2227A1AB00CE566B /* sun-behind-cloud.png */,
 				732840AA222799C200A52458 /* Assets.scnassets */,
 			);
 			path = SARS;
@@ -294,15 +296,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L6KCF3P2F4;
+				DEVELOPMENT_TEAM = 92A5732K5J;
 				INFOPLIST_FILE = SARS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ucla.SARS;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ucla.SARS-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -312,15 +316,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L6KCF3P2F4;
+				DEVELOPMENT_TEAM = 92A5732K5J;
 				INFOPLIST_FILE = SARS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ucla.SARS;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ucla.SARS-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
