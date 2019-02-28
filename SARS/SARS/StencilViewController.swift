@@ -14,6 +14,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     let sunImage = [UIImage(named: "sun-behind-cloud.png")]
+    var imageHolder = SCNNode(geometry: SCNPlane(width: 100, height: 100))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +85,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         let height = CGFloat(planeAnchor.extent.z)
         
         //3. Create An SCNPlane Which Matches The Size Of The ARPlaneAnchor
-        let imageHolder = SCNNode(geometry: SCNPlane(width: width, height: height))
+        imageHolder = SCNNode(geometry: SCNPlane(width: width, height: height))
         
         //4. Rotate It
         imageHolder.eulerAngles.x = -.pi/2
@@ -122,8 +123,10 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
         
-        guard let imageToApply = sunImage[sender.tag] else {
+        guard let imageToApply = sunImage[0] else {
             return
         }
+        imageHolder.geometry?.firstMaterial?.diffuse.contents = imageToApply
     }
+    
 }
