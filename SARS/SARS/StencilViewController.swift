@@ -13,7 +13,7 @@ import ARKit
 class StencilViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    let sunImage = [UIImage(named: "sun-behind-cloud.png")]
+    let sunImage = [UIImage(named: "art.scnassets/sun-behind-cloud.png")]
     var imageHolder = SCNNode(geometry: SCNPlane(width: 100, height: 100))
     
     override func viewDidLoad() {
@@ -32,7 +32,8 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         scanInfo.font = scanInfo.font.withSize(15)
         scanInfo.textColor = UIColor.white
         scanInfo.text = "Scan an Interface!"
-        
+        let img = UILabel(frame: CGRect(x: 8, y: self.sceneView.frame.height - 100, width: 160, height: 45))
+        img.backgroundColor = UIColor.init(patternImage: sunImage[0]!)
         let scanButton = UIButton(frame: CGRect(x: self.sceneView.frame.width / 2, y: self.sceneView.frame.height - 40, width: 160, height: 45))
         scanButton.backgroundColor = .blue
         scanButton.setTitle("Place Image!", for: UIControl.State.normal)
@@ -91,7 +92,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         imageHolder.eulerAngles.x = -.pi/2
         
         //5. Set It's Colour To Red
-        imageHolder.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
         
         //4. Add It To Our Node & Thus The Hiearchy
         node.addChildNode(imageHolder)
