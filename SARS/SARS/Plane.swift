@@ -14,8 +14,8 @@ extension UIColor {
 
 class Plane: SCNNode {
     
-    let meshNode: SCNNode
-    let extentNode: SCNNode
+    var meshNode: SCNNode
+    var extentNode: SCNNode
     var classificationNode: SCNNode?
     
     /// - Tag: VisualizePlane

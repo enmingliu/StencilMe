@@ -13,6 +13,7 @@ import ARKit
 class StencilViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    let sunImage = [UIImage(named: "sun-behind-cloud.png")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,11 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         scanInfo.textColor = UIColor.white
         scanInfo.text = "Scan an Interface!"
         
+        let scanButton = UIButton(frame: CGRect(x: self.sceneView.frame.width / 2, y: self.sceneView.frame.height - 40, width: 160, height: 45))
+        scanButton.backgroundColor = .blue
+        scanButton.setTitle("Place Image!", for: UIControl.State.normal)
+        scanButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
         // Set the view's delegate
         sceneView.delegate = self
 
@@ -45,6 +51,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         
         self.sceneView.addSubview(scanningPanel)
         self.sceneView.addSubview(scanInfo)
+        self.sceneView.addSubview(scanButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,5 +117,13 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+    
+    @objc func buttonAction(sender: UIButton!) {
+        print("Button tapped")
+        
+        guard let imageToApply = sunImage[sender.tag] else {
+            return
+        }
     }
 }
