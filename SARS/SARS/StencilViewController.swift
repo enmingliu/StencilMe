@@ -53,8 +53,9 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal, .vertical]
+        configuration.isLightEstimationEnabled = true
         // Run the view's session
-        sceneView.session.run(configuration)
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,24 +69,34 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         
-        // Place content only for anchors found by plane detection.
+        //1. Check We Have Detected An ARPlaneAnchor
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
-        // Create a custom object to visualize the plane geometry and extent.
-        let plane = Plane(anchor: planeAnchor, in: sceneView)
+        //2. Get The Size Of The ARPlaneAnchor
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
         
-        // Add the visualization to the ARKit-managed node so that it tracks
-        // changes in the plane anchor as plane estimation continues.
-        node.addChildNode(plane)
+        //3. Create An SCNPlane Which Matches The Size Of The ARPlaneAnchor
+        let imageHolder = SCNNode(geometry: SCNPlane(width: width, height: height))
+        
+        //4. Rotate It
+        imageHolder.eulerAngles.x = -.pi/2
+        
+        //5. Set It's Colour To Red
+        imageHolder.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        
+        //4. Add It To Our Node & Thus The Hiearchy
+        node.addChildNode(imageHolder)
         
     }
+    /*
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
         
         return node
     }
-    
+    */
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
