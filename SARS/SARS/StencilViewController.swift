@@ -17,9 +17,23 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let scanningPanel = UIImageView()
+        scanningPanel.backgroundColor = UIColor(white: 0.33, alpha: 0.6)
+        scanningPanel.layer.masksToBounds = true
+        scanningPanel.frame = CGRect(x: -2, y: self.sceneView.frame.height - 270, width: 178, height: 50)
+        
+        scanningPanel.layer.cornerRadius = 10
+        
+        let scanInfo = UILabel(frame: CGRect(x: 8, y: self.sceneView.frame.height - 268, width: 160, height: 45))
+        
+        scanInfo.textAlignment = .left
+        scanInfo.font = scanInfo.font.withSize(15)
+        scanInfo.textColor = UIColor.white
+        scanInfo.text = "Scan an Interface!"
+        
         // Set the view's delegate
         sceneView.delegate = self
-        
+
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
@@ -28,6 +42,9 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        self.sceneView.addSubview(scanningPanel)
+        self.sceneView.addSubview(scanInfo)
     }
     
     override func viewWillAppear(_ animated: Bool) {
