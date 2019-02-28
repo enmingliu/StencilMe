@@ -52,7 +52,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        configuration.planeDetection = [.horizontal, .vertical]
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -67,30 +67,24 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
         
-        let width  = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
+        // Place content only for anchors found by plane detection.
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
-        let imageHolder = SCNNode(geometry: SCNPlane(width:width, height:height))
+        // Create a custom object to visualize the plane geometry and extent.
+        let plane = Plane(anchor: planeAnchor, in: sceneView)
         
-        imageHolder.eulerAngles.x = -.pi/2
+        // Add the visualization to the ARKit-managed node so that it tracks
+        // changes in the plane anchor as plane estimation continues.
+        node.addChildNode(plane)
         
-        imageHolder.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-        
-        node.addChildNode(imageHolder)
     }
-    
-/*
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
         
         return node
     }
-*/
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
