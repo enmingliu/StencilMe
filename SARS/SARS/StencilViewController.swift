@@ -90,8 +90,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     
     @objc func alphaSliderValueDidChange(sender: UISlider!) {
         print("alpha value: \(sender.value)")
-        sunImage[0] = UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(CGFloat(sender!.value) / 1000)
-        imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
+        imageHolder.geometry?.firstMaterial?.diffuse.contents = currSelectedImage?.alpha(CGFloat(sender!.value) / 1000) //UIColor.red
     }
     
     override func viewWillAppear(_ animated: Bool) {
