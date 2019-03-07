@@ -13,8 +13,10 @@ import ARKit
 class StencilViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    let sunImage = [UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(0.5)]
+    var sunImage = [UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(0.5)]
     var imageHolder = SCNNode(geometry: SCNPlane(width: 100, height: 100))
+    
+    var alphaSlider : UISlider = UISlider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,15 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         scanButton.setTitle("Place Image!", for: UIControl.State.normal)
         scanButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
+        // Opacity Slider
+        alphaSlider = UISlider(frame: CGRect(x: 45, y: 70, width: 310, height: 31))
+        alphaSlider.minimumValue = 0
+        alphaSlider.maximumValue = 1000
+        alphaSlider.isContinuous = true
+        alphaSlider.tintColor = UIColor.blue
+        alphaSlider.value = 500
+        alphaSlider.addTarget(self, action: "alphaSliderValueDidChange:", for: .valueChanged)
+        
         // Set the view's delegate
         sceneView.delegate = self
 
@@ -54,6 +65,12 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         self.sceneView.addSubview(scanningPanel)
         self.sceneView.addSubview(scanInfo)
         self.sceneView.addSubview(scanButton)
+        self.sceneView.addSubview(alphaSlider)
+    }
+    
+    func alphaSliderVlaueDidChange(sender: UISlider!) {
+        print("alpha value: \(sender.value)")
+        sunImage[0] = UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(CGFloat(sender!.value) / 1000)
     }
     
     override func viewWillAppear(_ animated: Bool) {
