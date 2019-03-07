@@ -10,8 +10,13 @@ import UIKit
 import SceneKit
 import ARKit
 
-class StencilViewController: UIViewController, ARSCNViewDelegate {
-
+class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    let previewImage: UIButton = UIButton()
+    let applyStencilButton : UIButton = UIButton()
+    
+    var currSelectedImage = UIImage(named: "art.scnassets/sun-behind-cloud.png")
+    
     @IBOutlet var sceneView: ARSCNView!
     var sunImage = [UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(0.5)]
     var imageHolder = SCNNode(geometry: SCNPlane(width: 100, height: 100))
@@ -50,6 +55,24 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         alphaSlider.value = 500
         alphaSlider.addTarget(self, action: #selector(StencilViewController.alphaSliderValueDidChange), for: .valueChanged)
         
+        // Apply Stencil Button
+        applyStencilButton.backgroundColor = UIColor(white: 0.33, alpha: 0.6)
+        applyStencilButton.setTitle("Apply", for: .normal)
+        applyStencilButton.addTarget(self, action: #selector(self.applyStencil), for: .touchUpInside)
+        applyStencilButton.layer.cornerRadius = 20
+        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 70, y: self.view.frame.height-84, width: 140, height: 70)
+        
+        // Preview Image and Image Picker Button
+        previewImage.backgroundColor = UIColor(white: 1, alpha: 1)
+        previewImage.setImage(currSelectedImage, for: .normal)
+        previewImage.addTarget(self, action: #selector(self.openPhotoLibraryButton), for: .touchUpInside)
+        previewImage.layer.masksToBounds = true
+        previewImage.frame = CGRect(x: 4,
+                                    y: self.view.frame.height-84,
+                                    width: 70,
+                                    height: 70)
+        previewImage.layer.cornerRadius = 20
+        
         // Set the view's delegate
         sceneView.delegate = self
 
@@ -59,6 +82,8 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         self.sceneView.addSubview(scanningPanel)
         self.sceneView.addSubview(scanInfo)
         self.sceneView.addSubview(scanButton)
+        self.sceneView.addSubview(previewImage)
+        self.sceneView.addSubview(applyStencilButton)
         self.sceneView.addSubview(alphaSlider)
     }
     
@@ -141,6 +166,29 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
             return
         }
         imageHolder.geometry?.firstMaterial?.diffuse.contents = imageToApply
+    }
+    
+    @IBAction func applyStencil() {
+        print("button pressed")
+    }
+    
+    @IBAction func openPhotoLibraryButton(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        let image = info[.originalImage] as! UIImage
+        //let imageData = UIImage.jpegData(image)
+        self.previewImage.setImage(image, for: .normal)
+        currSelectedImage = image
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
