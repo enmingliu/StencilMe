@@ -13,7 +13,7 @@ import ARKit
 class StencilViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    let sunImage = [UIImage(named: "art.scnassets/sun-behind-cloud.png")]
+    let sunImage = [UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(0.5)]
     var imageHolder = SCNNode(geometry: SCNPlane(width: 100, height: 100))
     
     override func viewDidLoad() {
@@ -92,6 +92,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         imageHolder.eulerAngles.x = -.pi/2
         
         //5. Set It's Colour To Red
+        // imageHolder.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
         imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
         
         //4. Add It To Our Node & Thus The Hiearchy
@@ -130,4 +131,14 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         imageHolder.geometry?.firstMaterial?.diffuse.contents = imageToApply
     }
     
+}
+
+extension UIImage {
+    func alpha(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }
