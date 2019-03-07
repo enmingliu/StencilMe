@@ -78,7 +78,8 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
 
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
+        sceneView.isPlaying = true
+
         self.sceneView.addSubview(scanningPanel)
         self.sceneView.addSubview(scanInfo)
         self.sceneView.addSubview(scanButton)
@@ -114,7 +115,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
+        imageHolder.removeFromParentNode()
         //1. Check We Have Detected An ARPlaneAnchor
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
