@@ -48,7 +48,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         alphaSlider.isContinuous = true
         alphaSlider.tintColor = UIColor.blue
         alphaSlider.value = 500
-        alphaSlider.addTarget(self, action: "alphaSliderValueDidChange:", for: .valueChanged)
+        alphaSlider.addTarget(self, action: #selector(StencilViewController.alphaSliderValueDidChange), for: .valueChanged)
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -62,9 +62,10 @@ class StencilViewController: UIViewController, ARSCNViewDelegate {
         self.sceneView.addSubview(alphaSlider)
     }
     
-    func alphaSliderVlaueDidChange(sender: UISlider!) {
+    @objc func alphaSliderValueDidChange(sender: UISlider!) {
         print("alpha value: \(sender.value)")
         sunImage[0] = UIImage(named: "art.scnassets/sun-behind-cloud.png")?.alpha(CGFloat(sender!.value) / 1000)
+        imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
     }
     
     override func viewWillAppear(_ animated: Bool) {
