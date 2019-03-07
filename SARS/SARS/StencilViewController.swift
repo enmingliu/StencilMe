@@ -131,7 +131,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         
         //5. Set It's Colour To Red
         // imageHolder.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
-        imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
+        //imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
         
         //4. Add It To Our Node & Thus The Hiearchy
         node.addChildNode(imageHolder)
@@ -170,7 +170,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     }
     
     @IBAction func applyStencil() {
-        print("button pressed")
+        imageHolder.geometry?.firstMaterial?.diffuse.contents = currSelectedImage
     }
     
     @IBAction func openPhotoLibraryButton(sender: AnyObject) {
