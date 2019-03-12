@@ -51,14 +51,14 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         alphaSlider.minimumValue = 0
         alphaSlider.maximumValue = 1000
         alphaSlider.isContinuous = true
-        alphaSlider.tintColor = UIColor.blue
+        alphaSlider.tintColor = UIColor.init(red: 244/255, green: 175/255, blue: 73/255, alpha: 1)
 
         alphaSlider.value = 1000
         alphaSlider.addTarget(self, action: #selector(StencilViewController.alphaSliderValueDidChange), for: .valueChanged)
         
         // Apply Stencil Button
         applyStencilButton.backgroundColor = UIColor.init(red: 255/255, green: 199/255, blue: 117/255, alpha: 1)
-        applyStencilButton.setImage(UIImage(named: "art.scnassets/PencilAndPaper.png")!.alpha(0.8), for: .normal)
+        applyStencilButton.setImage(UIImage(named: "art.scnassets/PencilAndPaper.png")!.addImagePadding(x: 100, y: 100), for: .normal)
         //applyStencilButton.setTitle("Apply", for: .normal)
         applyStencilButton.addTarget(self, action: #selector(self.applyStencil), for: .touchUpInside)
         applyStencilButton.layer.cornerRadius = 20
