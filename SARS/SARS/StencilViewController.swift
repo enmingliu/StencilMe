@@ -35,7 +35,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         scanningPanel.layer.cornerRadius = 10
         
         let backgroundView = UIImageView()
-        backgroundView.frame = CGRect(x: 0, y: self.sceneView.frame.height - 95, width: self.sceneView.frame.width, height: 95)
+        backgroundView.frame = CGRect(x: 0, y: self.sceneView.frame.height - 85, width: self.sceneView.frame.width, height: 85)
         backgroundView.backgroundColor = UIColor.init(white: 0, alpha: 1)
         
         let scanInfo = UILabel(frame: CGRect(x: 8, y: self.sceneView.frame.height - 268, width: 160, height: 45))
@@ -74,7 +74,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         //applyStencilButton.setTitle("Apply", for: .normal)
         applyStencilButton.addTarget(self, action: #selector(self.applyStencil), for: .touchUpInside)
         applyStencilButton.layer.cornerRadius = 20
-        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 25, y: self.view.frame.height-90, width: 70, height: 70)
+        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 25, y: self.view.frame.height-75, width: 70, height: 70)
         
         // Preview Image and Image Picker Button
         previewImage.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -82,7 +82,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         previewImage.addTarget(self, action: #selector(self.openPhotoLibraryButton), for: .touchUpInside)
         previewImage.layer.masksToBounds = true
         previewImage.frame = CGRect(x: 4,
-                                    y: self.view.frame.height-93,
+                                    y: self.view.frame.height-75,
                                     width: 70,
                                     height: 70)
         previewImage.layer.cornerRadius = 20
@@ -187,6 +187,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     
     @IBAction func applyStencil() {
         alphaSlider.value = 1000;
+        alphaLabel.text = "100% Opacity"
         imageHolder.geometry?.firstMaterial?.diffuse.contents = currSelectedImage
     }
     
