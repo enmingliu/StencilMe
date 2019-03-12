@@ -34,13 +34,17 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         
         scanningPanel.layer.cornerRadius = 10
         
+        let backgroundView = UIImageView()
+        backgroundView.frame = CGRect(x: 0, y: self.sceneView.frame.height - 95, width: self.sceneView.frame.width, height: 95)
+        backgroundView.backgroundColor = UIColor.init(white: 0, alpha: 1)
+        
         let scanInfo = UILabel(frame: CGRect(x: 8, y: self.sceneView.frame.height - 268, width: 160, height: 45))
         
         scanInfo.textAlignment = .left
         scanInfo.font = scanInfo.font.withSize(15)
         scanInfo.textColor = UIColor.white
         scanInfo.text = "Scan an Interface!"
-        let img = UILabel(frame: CGRect(x: 8, y: self.sceneView.frame.height - 100, width: 160, height: 45))
+        let img = UILabel(frame: CGRect(x: 8, y: self.sceneView.frame.height - 90, width: 160, height: 45))
         img.backgroundColor = UIColor.init(patternImage: sunImage[0]!)
         let scanButton = UIButton(frame: CGRect(x: self.sceneView.frame.width / 2, y: self.sceneView.frame.height - 40, width: 160, height: 45))
         scanButton.backgroundColor = .blue
@@ -70,7 +74,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         //applyStencilButton.setTitle("Apply", for: .normal)
         applyStencilButton.addTarget(self, action: #selector(self.applyStencil), for: .touchUpInside)
         applyStencilButton.layer.cornerRadius = 20
-        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 25, y: self.view.frame.height-93, width: 70, height: 70)
+        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 25, y: self.view.frame.height-90, width: 70, height: 70)
         
         // Preview Image and Image Picker Button
         previewImage.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -93,6 +97,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         //self.sceneView.addSubview(scanningPanel)
         //self.sceneView.addSubview(scanInfo)
         //self.sceneView.addSubview(scanButton)
+        self.sceneView.addSubview(backgroundView)
         self.sceneView.addSubview(previewImage)
         self.sceneView.addSubview(applyStencilButton)
         self.sceneView.addSubview(alphaSlider)
