@@ -62,11 +62,11 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         alphaSlider.addTarget(self, action: #selector(StencilViewController.alphaSliderValueDidChange), for: .valueChanged)
         
         // Opacity Label
-        alphaLabel = UILabel(frame: CGRect(x: 10, y: 20, width: 100, height: 41))
+        alphaLabel = UILabel(frame: CGRect(x: 10, y: 20, width: 150, height: 41))
         alphaLabel.center = CGPoint(x: 190, y: 61)
         alphaLabel.textAlignment = NSTextAlignment.center
         alphaLabel.textColor = UIColor.init(red: 255/255, green: 199/255, blue: 117/255, alpha: 1)
-        alphaLabel.text = "% Opacity"
+        alphaLabel.text = "100% Opacity"
         
         // Apply Stencil Button
         applyStencilButton.backgroundColor = UIColor.init(red: 255/255, green: 199/255, blue: 117/255, alpha: 1)
