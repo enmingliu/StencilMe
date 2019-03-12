@@ -87,6 +87,9 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
                                     height: 70)
         previewImage.layer.cornerRadius = 20
         
+        let pausedSwitch = UISwitch()
+        pausedSwitch.frame = CGRect(x: (view.bounds.width / 2) + 100, y: self.view.frame.height-60, width: 50, height: 50)
+        
         // Set the view's delegate
         sceneView.delegate = self
 
@@ -102,6 +105,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         self.sceneView.addSubview(applyStencilButton)
         self.sceneView.addSubview(alphaSlider)
         self.sceneView.addSubview(alphaLabel)
+        self.sceneView.addSubview(pausedSwitch)
     }
     
     @objc func alphaSliderValueDidChange(sender: UISlider!) {
@@ -149,7 +153,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         // imageHolder.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
         //imageHolder.geometry?.firstMaterial?.diffuse.contents = sunImage[0] //UIColor.red
         
-        //4. Add It To Our Node & Thus The Hiearchy
+        //4. Add It To Our Node & Thus The Hierarchy
         node.addChildNode(imageHolder)
         
     }
@@ -208,6 +212,10 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         self.previewImage.setImage(image, for: .normal)
         currSelectedImage = image
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func togglePaused(sender: UISwitch){
+        self.sceneView.scene.isPaused = sender.isOn
     }
     
 }
