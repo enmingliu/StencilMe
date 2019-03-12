@@ -22,6 +22,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     var imageHolder = SCNNode(geometry: SCNPlane(width: 100, height: 100))
     
     var alphaSlider : UISlider = UISlider()
+    var alphaLabel : UILabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,13 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         alphaSlider.value = 1000
         alphaSlider.addTarget(self, action: #selector(StencilViewController.alphaSliderValueDidChange), for: .valueChanged)
         
+        // Opacity Label
+        alphaLabel = UILabel(frame: CGRect(x: 10, y: 20, width: 100, height: 41))
+        alphaLabel.center = CGPoint(x: 190, y: 61)
+        alphaLabel.textAlignment = NSTextAlignment.center
+        alphaLabel.textColor = UIColor.init(red: 255/255, green: 199/255, blue: 117/255, alpha: 1)
+        alphaLabel.text = "% Opacity"
+        
         // Apply Stencil Button
         applyStencilButton.backgroundColor = UIColor.init(red: 255/255, green: 199/255, blue: 117/255, alpha: 1)
         applyStencilButton.setImage(UIImage(named: "art.scnassets/PencilAndPaper.png")!.addImagePadding(x: 100, y: 100), for: .normal)
@@ -88,10 +96,12 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         self.sceneView.addSubview(previewImage)
         self.sceneView.addSubview(applyStencilButton)
         self.sceneView.addSubview(alphaSlider)
+        self.sceneView.addSubview(alphaLabel)
     }
     
     @objc func alphaSliderValueDidChange(sender: UISlider!) {
         print("alpha value: \(sender.value)")
+        alphaLabel.text = "\(sender.value * 1000)% Opacity"
         imageHolder.geometry?.firstMaterial?.diffuse.contents = currSelectedImage?.alpha(CGFloat(sender!.value) / 1000) //UIColor.red
     }
     
