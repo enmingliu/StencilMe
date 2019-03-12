@@ -25,7 +25,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.shared.isIdleTimerDisabled = true
         let scanningPanel = UIImageView()
         scanningPanel.backgroundColor = UIColor(white: 0.33, alpha: 0.6)
         scanningPanel.layer.masksToBounds = true
@@ -52,15 +52,17 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         alphaSlider.maximumValue = 1000
         alphaSlider.isContinuous = true
         alphaSlider.tintColor = UIColor.blue
-        alphaSlider.value = 500
+
+        alphaSlider.value = 1000
         alphaSlider.addTarget(self, action: #selector(StencilViewController.alphaSliderValueDidChange), for: .valueChanged)
         
         // Apply Stencil Button
-        applyStencilButton.backgroundColor = UIColor(white: 0.33, alpha: 0.6)
-        applyStencilButton.setTitle("Apply", for: .normal)
+        applyStencilButton.backgroundColor = UIColor.init(red: 255/255, green: 199/255, blue: 117/255, alpha: 1)
+        applyStencilButton.setImage(UIImage(named: "art.scnassets/PencilAndPaper.png")!.alpha(0.8), for: .normal)
+        //applyStencilButton.setTitle("Apply", for: .normal)
         applyStencilButton.addTarget(self, action: #selector(self.applyStencil), for: .touchUpInside)
         applyStencilButton.layer.cornerRadius = 20
-        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 70, y: self.view.frame.height-84, width: 140, height: 70)
+        applyStencilButton.frame = CGRect(x: (view.bounds.width / 2) - 25, y: self.view.frame.height-93, width: 70, height: 70)
         
         // Preview Image and Image Picker Button
         previewImage.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -68,7 +70,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         previewImage.addTarget(self, action: #selector(self.openPhotoLibraryButton), for: .touchUpInside)
         previewImage.layer.masksToBounds = true
         previewImage.frame = CGRect(x: 4,
-                                    y: self.view.frame.height-84,
+                                    y: self.view.frame.height-93,
                                     width: 70,
                                     height: 70)
         previewImage.layer.cornerRadius = 20
@@ -80,9 +82,9 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
         sceneView.showsStatistics = true
         sceneView.isPlaying = true
 
-        self.sceneView.addSubview(scanningPanel)
-        self.sceneView.addSubview(scanInfo)
-        self.sceneView.addSubview(scanButton)
+        //self.sceneView.addSubview(scanningPanel)
+        //self.sceneView.addSubview(scanInfo)
+        //self.sceneView.addSubview(scanButton)
         self.sceneView.addSubview(previewImage)
         self.sceneView.addSubview(applyStencilButton)
         self.sceneView.addSubview(alphaSlider)
@@ -169,6 +171,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     }
     
     @IBAction func applyStencil() {
+        alphaSlider.value = 1000;
         imageHolder.geometry?.firstMaterial?.diffuse.contents = currSelectedImage
     }
     
