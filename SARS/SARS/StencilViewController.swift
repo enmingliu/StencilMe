@@ -106,7 +106,7 @@ class StencilViewController: UIViewController, ARSCNViewDelegate, UIImagePickerC
     
     @objc func alphaSliderValueDidChange(sender: UISlider!) {
         print("alpha value: \(sender.value)")
-        alphaLabel.text = "\(sender.value * 1000)% Opacity"
+        alphaLabel.text = "\(Int(sender.value / 10))% Opacity"
         imageHolder.geometry?.firstMaterial?.diffuse.contents = currSelectedImage?.alpha(CGFloat(sender!.value) / 1000) //UIColor.red
     }
     
