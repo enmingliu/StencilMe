@@ -12,24 +12,19 @@ import UIKit
 
 
 class LaunchScreenController : UIViewController {
-    
-    @IBOutlet weak var pencil : UIImageView!
+
     @IBOutlet weak var spray: UIImageView!
+    @IBOutlet weak var pencil: UIImageView!
     @IBOutlet weak var logo: UIImageView!
-    
-    
-    override func viewDidLoad() {
-        self.pencil.alpha=0
-        self.spray.alpha=0
-        self.logo.alpha=0
-        super.viewDidLoad();
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.pencil.alpha=0
         self.spray.alpha=0
         self.logo.alpha=0
+        self.pencil.isHidden=false;
+        self.logo.isHidden=false;
+        self.spray.isHidden=false;
         self.pencil.center.x-=100;
         self.spray.center.x+=100;
     }

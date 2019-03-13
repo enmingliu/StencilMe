@@ -66,14 +66,14 @@
 		280E930C221E57B80015F949 /* SARS */ = {
 			isa = PBXGroup;
 			children = (
-				908C7339223896EC009AEF24 /* logo.png */,
-				908C7338223896EC009AEF24 /* pencil.png */,
-				908C7337223896EC009AEF24 /* spray.jpeg */,
 				280E930D221E57B80015F949 /* AppDelegate.swift */,
 				280E930F221E57B80015F949 /* art.scnassets */,
 				280E9311221E57B80015F949 /* StencilViewController.swift */,
 				280E9313221E57B80015F949 /* Main.storyboard */,
 				280E9316221E57BF0015F949 /* Assets.xcassets */,
+				908C7339223896EC009AEF24 /* logo.png */,
+				908C7338223896EC009AEF24 /* pencil.png */,
+				908C7337223896EC009AEF24 /* spray.jpeg */,
 				280E9318221E57BF0015F949 /* LaunchScreen.storyboard */,
 				280E931B221E57BF0015F949 /* Info.plist */,
 				732840AA222799C200A52458 /* Assets.scnassets */,
