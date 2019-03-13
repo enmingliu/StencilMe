@@ -41,7 +41,7 @@
         <!--Launch Screen Controller-->
         <scene sceneID="vuo-Ir-tpS">
             <objects>
-                <viewController id="73g-mV-mGJ" customClass="LaunchScreenController" customModule="UI_Development_for_SARS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="73g-mV-mGJ" customClass="LaunchScreenController" customModule="UI_Development_for_SARS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1XR-Hn-awa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,6 +66,7 @@
                         <outlet property="logo" destination="e4t-14-Kww" id="8dH-d4-7BB"/>
                         <outlet property="pencil" destination="6UC-Z2-H4X" id="NOD-Hz-pNG"/>
                         <outlet property="spray" destination="qmP-00-y1O" id="jex-zf-B1U"/>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="segueAR" modalTransitionStyle="partialCurl" id="gks-zn-3vE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omr-eJ-Xdl" userLabel="First Responder" sceneMemberID="firstResponder"/>

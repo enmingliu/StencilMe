@@ -42,7 +42,7 @@ class LaunchScreenController : UIViewController {
         {(success) in
             
             usleep(2000000)
-            self.performSegue(withIdentifier: "segueMainScreen", sender: self)
+            //self.performSegue(withIdentifier: "segueMainScreen", sender: self)
         }
         
     }
