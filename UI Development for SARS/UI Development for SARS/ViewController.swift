@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Reached here")
         let previewImage = UIImageView()
         previewImage.backgroundColor = UIColor(white: 0.33, alpha: 0.6)
         previewImage.image = UIImage(named:"pikachu-lineart")
