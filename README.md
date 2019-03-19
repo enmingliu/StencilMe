@@ -1,5 +1,5 @@
 # StencilMe
-Stencil Augmented Reality System
+App that uses the iOS ARKit API to display a user image on a flat surface of their choice, removing the need to carry around or create physical stencils to replicate their hand-drawn images.
 
 ## Description
 
